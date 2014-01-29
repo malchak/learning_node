@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  section#wrapper
+    h2 Basic Structure
+    section
+      p
+        span This is a span within a p within a div!
+
+  - var name = "Michael"
+  h1 Hello #{name}!
+
+  - users = ['Moe', 'Curly', 'Larry']
+  - each user in users
+    p= user
+
+  - obj = { first_name: 'George', surename: 'Orvil'}
+  - each val, key in obj
+    li #{key}: #{val}
+
+  - raining = true
+  if (raining)
+    p It is raining.  Take an umbrella!
+  else
+    p No rain.  Take the bike!
+
+  include includes/footer
+  
+  script
+    alert('Inline Javascript in Jade')
