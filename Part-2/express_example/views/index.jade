@@ -1,5 +1,28 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  //- h2 Form example
+  //- form(method='post' action='/')
+  //-   fieldset
+  //-     legend Add a user
+  //-     p
+  //-       label First Name
+  //-       input(name='user[first_name]')
+  //-     p
+  //-       label Last Name
+  //-       input(name='user[surname]')
+  //-     p
+  //-       input(type='submit', value='save')
+  h1  Passing data through the view layer
+
+  h3  First Name
+  p=  user.first_name
+
+  h3  Surname
+  p=  user.surname
+
+  h3  Address
+  p=  user.address
+
+  h3  Facebook Friends
+  p=  user.facebook_friends

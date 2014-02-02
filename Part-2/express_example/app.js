@@ -28,8 +28,30 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+//app.get('/', routes.index);
+app.get('/', function(req, res){
+	var user = {
+		first_name: 'Lou',
+		surname:    'Dobbs',
+		address: 		'Some corporate building, Washington D.C.',
+		facebook_frinds: '500'
+	};
+	res.render('index.jade', { title: 'User', user: user });
+});
+
+app.get('/about', function(req, res){
+	res.send('Hello from the about route!');
+});
+
 app.get('/users', user.list);
+
+app.post('/', function(req, res){
+	res.send(req.body);
+});
+
+app.get('/user/:id', function(req, res){
+	res.send('show content for user id ' + req.params.id);
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
