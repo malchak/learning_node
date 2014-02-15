@@ -60,6 +60,39 @@ app.post('/tasks', function(req, res){
 	});
 });
 
+app.get('/tasks/:id/edit', function(req, res){
+	Task.findById(req.params.id, function(err, doc){
+		res.render('tasks/edit', {
+			title: "Edit Task",
+			task: doc
+		});
+	});
+});
+
+app.put('/tasks/:id', function(req, res){
+	Task.findById(req.params.id, function(err, doc){
+		doc.task = req.body.task.task;
+		doc.save(function(err){
+			if (!err){
+				res.redirect('/tasks');
+			} else {
+				// error handling
+			}
+		});
+	});
+});
+
+app.del('/tasks/:id', function(req, res){
+	Task.findById(req.params.id, function(err, doc){
+		if (!doc) return next(new NotFound('Document not found'));
+		doc.remove(function(){
+			res.redirect('/tasks');
+		});
+	});
+});
+
+
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

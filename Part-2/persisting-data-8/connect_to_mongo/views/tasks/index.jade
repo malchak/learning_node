@@ -1,14 +1,23 @@
-h1 Your Tasks
+extends layout
 
-- if(docs.length)
-	table
-		tr
-			th Task
-				each task in docs
-					tr
-						td #{task.task}
-- else
-	p You don't have any tasks!
+block content
+	h1 Your Tasks
 
-p
-	a(href='/tasks/new', class='btn btn-primary') Add a task
+	- if(docs.length)
+		table
+			tr
+				th Task
+					each task in docs
+						tr
+							td #{task.task}
+							td
+								a(href="/tasks/#{task.id}/edit") Edit
+							td
+								form(method="post", action="/tasks/" + task.id)
+									input(name='_method', value='DELETE', type='hidden')
+									button(type='submit') Delete
+	- else
+		p You don't have any tasks!
+
+	p
+		a(href='/tasks/new', class='btn btn-primary') Add a task
