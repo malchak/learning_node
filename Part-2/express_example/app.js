@@ -28,6 +28,28 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// writing data to a text file
+var fs = require('fs'),
+		data= "Some data I want to write to a file"
+
+fs.writeFile('file.txt', data, function(err){
+	if (!err){
+		console.log('wrote data to a text file');
+	} else {
+		throw err;
+	}
+});
+
+// reading data from a textfile
+fs.readFile('file.txt', 'utf8', function(err, data){
+	if (!err){
+		console.log('Reading: '+ data);
+	} else {
+		console.log('error!');
+	}
+}); 
+
+// HTTP RESQUESTs
 //app.get('/', routes.index);
 app.get('/', function(req, res){
 	var user = {
